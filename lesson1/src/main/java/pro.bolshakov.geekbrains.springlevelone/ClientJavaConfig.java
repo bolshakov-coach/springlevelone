@@ -7,10 +7,18 @@ public class ClientJavaConfig {
 
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        Camera camera = context.getBean("camera", Camera.class);
-        camera.doPhotograph();
 
         Camera cameraComponent = context.getBean("cameraComponent", Camera.class);
         cameraComponent.doPhotograph();
+
+        cameraComponent.breaking();
+
+        cameraComponent.doPhotograph();
+
+        //get new
+        System.out.println("give me new camera!");
+        Camera cameraComponentNew = context.getBean("cameraComponent", Camera.class);
+        cameraComponentNew.doPhotograph();
+
     }
 }
