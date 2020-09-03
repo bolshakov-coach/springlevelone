@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="helloMan1" class="pro.bolshakov.geekbrains.springlevelone.helloman.HelloManOnceSay">
+        <constructor-arg value="Vasiliy"/>
+    </bean>
+
+    <bean id="helloMan2" class="pro.bolshakov.geekbrains.springlevelone.helloman.HelloManOnceSay">
+        <constructor-arg type="java.lang.String" index="0" value="Vasiliy2"/>
+    </bean>
+
+    <bean id="helloMan3" class="pro.bolshakov.geekbrains.springlevelone.helloman.HelloManOnceSay">
+        <property name="name" value="Vasiliy3"/>
+    </bean>
+
+</beans>
