@@ -22,4 +22,14 @@ public class CameraImpl implements Camera{
     public void setCameraRoll(CameraRoll cameraRoll) {
         this.cameraRoll = cameraRoll;
     }
+
+    @Override
+    public void breaking() {
+
+    }
+
+    @Override
+    public boolean isBroken() {
+        return false;
+    }
 }
