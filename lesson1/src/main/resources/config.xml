@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="cameraRoll" class="pro.bolshakov.geekbrains.springlevelone.ColorCameraRoll" />
+
+    <bean id="camera" class="pro.bolshakov.geekbrains.springlevelone.CameraImpl">
+        <property name="cameraRoll" ref="cameraRoll"/>
+    </bean>
+
+    <bean id="cameraInnerBean" class="pro.bolshakov.geekbrains.springlevelone.CameraImpl">
+        <property name="cameraRoll">
+            <bean class="pro.bolshakov.geekbrains.springlevelone.BlackWhiteCameraRoll"/>
+        </property>
+    </bean>
+
+    <bean id="cameraConstructor" class="pro.bolshakov.geekbrains.springlevelone.CameraImpl">
+        <constructor-arg name="cameraRoll" ref="cameraRoll"/>
+    </bean>
+</beans>
