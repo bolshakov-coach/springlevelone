@@ -1,7 +1,7 @@
 package pro.bolshakov.geekbrains.springlevelone;
 
 public class Camera {
-    private CameraRoll cameraRoll;
+    private CameraRoll cameraRoll = new CameraRoll();
 
     public void doPhotograph(){
         System.out.println("Chick - chick");
