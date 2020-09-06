@@ -2,10 +2,7 @@ package pro.bolshakov.geekbrains.lesson2.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import pro.bolshakov.geekbrains.lesson2.domain.Product;
 import pro.bolshakov.geekbrains.lesson2.service.ProductServiceImpl;
 
@@ -41,6 +38,19 @@ public class ProductController {
     public String apiPrice(@PathVariable Long id){
         Product byId = productService.getById(id);
         return String.valueOf(byId == null ? null : byId.getPrice());
+    }
+
+    @GetMapping("/new")
+    public String getFormNewProduct(Model model){
+        model.addAttribute("product", new Product());
+        return "new-product";
+    }
+
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public String addNewProduct(Product product){
+        Product savedProduct = productService.save(product);
+        System.out.println(savedProduct);
+        return "redirect:/products/" + savedProduct.getId();
     }
 
 
