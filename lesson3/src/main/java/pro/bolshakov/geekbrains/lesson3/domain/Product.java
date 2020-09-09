@@ -1,6 +1,7 @@
 package pro.bolshakov.geekbrains.lesson3.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -13,9 +14,11 @@ public class Product {
     @Column(name = "title")
     private String title;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @ManyToMany
+    @JoinTable(name = "products_categories",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private List<Category> categories;
 
     public Product() {
     }
@@ -36,11 +39,12 @@ public class Product {
         this.title = title;
     }
 
-    public Category getCategory() {
-        return category;
+
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 }
