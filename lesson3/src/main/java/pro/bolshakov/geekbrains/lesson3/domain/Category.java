@@ -14,7 +14,7 @@ public class Category {
     @Column(name = "title")
     private String title;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "products_categories",
             joinColumns = @JoinColumn(name = "category_id"),
