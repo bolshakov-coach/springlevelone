@@ -16,7 +16,11 @@ public class App {
 
         EntityManager em = entityFactory.createEntityManager();
 
-        createEntity(em);
+        Person person = new Person();
+        person.setFirstname("Vasiliy");
+        person.setLastname("Ivanov");
+
+        createEntity(em, person);
 
         Person readEntity = readEntity(em, 1L);
         readEntity.setFirstname("New Name");
@@ -26,17 +30,13 @@ public class App {
 
     }
 
-    private static void createEntity(EntityManager em){
+    private static void createEntity(EntityManager em, Person entity){
 
         System.out.println("Creating entity");
-        //declare entity
-        Person person = new Person();
-        person.setFirstname("Vasiliy");
-        person.setLastname("Ivanov");
         //open transaction
         em.getTransaction().begin();
         //put person into persist area of Hibernate
-        em.persist(person);
+        em.persist(entity);
         //commit/close transaction
         em.getTransaction().commit();
 
