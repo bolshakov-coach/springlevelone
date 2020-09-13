@@ -107,7 +107,6 @@ public class InitData {
         em.getTransaction().commit();
     }
 
-
     private static void initCategory(EntityManager em) {
         em.getTransaction().begin();
 
@@ -119,4 +118,43 @@ public class InitData {
         em.getTransaction().commit();
     }
 
+    public static Category getCategory1() {
+        return CATEGORY_1;
+    }
+
+    public static Category getCategory2() {
+        return CATEGORY_2;
+    }
+
+    public static Category getCategory3() {
+        return CATEGORY_3;
+    }
+
+    public static Author getAuthor1() {
+        return AUTHOR_1;
+    }
+
+    public static Author getAuthor2() {
+        return AUTHOR_2;
+    }
+
+    public static Author getAuthor3() {
+        return AUTHOR_3;
+    }
+
+    public static Article getArticle1() {
+        return ARTICLE_1;
+    }
+
+    public static Article getArticle2() {
+        return ARTICLE_2;
+    }
+
+    public static Article getArticle3() {
+        return ARTICLE_3;
+    }
+
+    public static Article getArticle4() {
+        return ARTICLE_4;
+    }
 }
