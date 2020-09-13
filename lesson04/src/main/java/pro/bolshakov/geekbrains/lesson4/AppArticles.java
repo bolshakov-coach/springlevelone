@@ -1,6 +1,7 @@
 package pro.bolshakov.geekbrains.lesson4;
 
 import org.hibernate.cfg.Configuration;
+import pro.bolshakov.geekbrains.lesson4.domain.Article;
 import pro.bolshakov.geekbrains.lesson4.domain.Category;
 
 import javax.persistence.EntityManager;
@@ -20,7 +21,13 @@ public class AppArticles {
 
         InitData.initData(em);
 
-        examplePersistenceArea(em);
+        em.close();
+
+        EntityManager emNew = entityFactory.createEntityManager();
+        exampleFetching(emNew);
+        emNew.close();
+
+        entityFactory.close();
     }
 
     private static void examplePersistenceArea(EntityManager em) {
@@ -70,5 +77,17 @@ public class AppArticles {
         threadPool.shutdown();
     }
 
+    private static void exampleFetching(EntityManager em){
 
+        em.getTransaction().begin();
+
+        Article article = em.find(Article.class, InitData.getArticle1().getId());
+        System.out.println("Before reading category");
+        System.out.println(article.getCategory());
+
+        System.out.println("before reading lazy category");
+        System.out.println(article.getCategoryLazy());
+
+        em.getTransaction().commit();
+    }
 }

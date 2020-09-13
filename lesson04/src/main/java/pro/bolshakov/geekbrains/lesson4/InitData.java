@@ -61,6 +61,7 @@ public class InitData {
         ARTICLE_1.setTitle("Article " + ++ind);
         ARTICLE_1.setContent("Article's content " + ind);
         ARTICLE_1.setCategory(CATEGORY_1);
+        ARTICLE_1.setCategoryLazy(CATEGORY_2);
         ARTICLE_1.setAuthor(AUTHOR_1);
         ARTICLE_1.setDate(new Date(2020, 1, 1));
 

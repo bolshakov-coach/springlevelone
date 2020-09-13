@@ -22,6 +22,10 @@ public class Article {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_lazy_id")
+    private Category categoryLazy;
+
     public Article() {
     }
 
@@ -71,5 +75,13 @@ public class Article {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Category getCategoryLazy() {
+        return categoryLazy;
+    }
+
+    public void setCategoryLazy(Category categoryLazy) {
+        this.categoryLazy = categoryLazy;
     }
 }
