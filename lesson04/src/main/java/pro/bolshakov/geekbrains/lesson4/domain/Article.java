@@ -4,6 +4,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Article.findAll", query = "SELECT a from Article a"),
+        @NamedQuery(name = "Article.findByLowerId", query = "SELECT a from Article a where a.id < :id")
+})
 public class Article {
     @Id
     @GeneratedValue
@@ -21,6 +25,10 @@ public class Article {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_lazy_id")
+    private Category categoryLazy;
 
     public Article() {
     }
@@ -71,5 +79,26 @@ public class Article {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Category getCategoryLazy() {
+        return categoryLazy;
+    }
+
+    public void setCategoryLazy(Category categoryLazy) {
+        this.categoryLazy = categoryLazy;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", date=" + date +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", author=" + author +
+                ", category=" + category +
+                ", categoryLazy=" + categoryLazy +
+                '}';
     }
 }

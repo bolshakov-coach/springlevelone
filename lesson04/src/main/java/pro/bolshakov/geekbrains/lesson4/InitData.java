@@ -56,30 +56,31 @@ public class InitData {
         initArticles(em);
     }
 
-    private static void initArticlesData(){
+    public static void initArticlesData(){
 
         ARTICLE_1.setTitle("Article " + ++ind);
         ARTICLE_1.setContent("Article's content " + ind);
-        ARTICLE_1.setCategory(CATEGORY_1);
-        ARTICLE_1.setAuthor(AUTHOR_1);
+//        ARTICLE_1.setCategory(CATEGORY_1);
+//        ARTICLE_1.setCategoryLazy(CATEGORY_2);
+//        ARTICLE_1.setAuthor(AUTHOR_1);
         ARTICLE_1.setDate(new Date(2020, 1, 1));
 
         ARTICLE_2.setTitle("Article " + ++ind);
         ARTICLE_2.setContent("Article's content " + ind);
-        ARTICLE_2.setCategory(CATEGORY_1);
-        ARTICLE_2.setAuthor(AUTHOR_2);
+//        ARTICLE_2.setCategory(CATEGORY_1);
+//        ARTICLE_2.setAuthor(AUTHOR_2);
         ARTICLE_2.setDate(new Date(2020, 1, 10));
 
         ARTICLE_3.setTitle("Article " + ++ind);
         ARTICLE_3.setContent("Article's content " + ind);
-        ARTICLE_3.setCategory(CATEGORY_2);
-        ARTICLE_3.setAuthor(AUTHOR_2);
+//        ARTICLE_3.setCategory(CATEGORY_2);
+//        ARTICLE_3.setAuthor(AUTHOR_2);
         ARTICLE_3.setDate(new Date(2020, 2, 10));
 
         ARTICLE_4.setTitle("Article " + ++ind);
         ARTICLE_4.setContent("Article's content " + ind);
-        ARTICLE_4.setCategory(CATEGORY_1);
-        ARTICLE_4.setAuthor(AUTHOR_1);
+//        ARTICLE_4.setCategory(CATEGORY_1);
+//        ARTICLE_4.setAuthor(AUTHOR_1);
         ARTICLE_4.setDate(new Date(2020, 2, 10));
     }
 
@@ -107,7 +108,6 @@ public class InitData {
         em.getTransaction().commit();
     }
 
-
     private static void initCategory(EntityManager em) {
         em.getTransaction().begin();
 
@@ -119,4 +119,43 @@ public class InitData {
         em.getTransaction().commit();
     }
 
+    public static Category getCategory1() {
+        return CATEGORY_1;
+    }
+
+    public static Category getCategory2() {
+        return CATEGORY_2;
+    }
+
+    public static Category getCategory3() {
+        return CATEGORY_3;
+    }
+
+    public static Author getAuthor1() {
+        return AUTHOR_1;
+    }
+
+    public static Author getAuthor2() {
+        return AUTHOR_2;
+    }
+
+    public static Author getAuthor3() {
+        return AUTHOR_3;
+    }
+
+    public static Article getArticle1() {
+        return ARTICLE_1;
+    }
+
+    public static Article getArticle2() {
+        return ARTICLE_2;
+    }
+
+    public static Article getArticle3() {
+        return ARTICLE_3;
+    }
+
+    public static Article getArticle4() {
+        return ARTICLE_4;
+    }
 }
