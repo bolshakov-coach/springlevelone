@@ -1,11 +1,17 @@
 package pro.bolshakov.geekbrains.lesson4;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import pro.bolshakov.geekbrains.lesson4.domain.*;
 import pro.bolshakov.geekbrains.lesson4.repository.ArticleJpqlDAOImpl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -14,7 +20,7 @@ public class AppArticles {
 
     public static void main(String[] args) {
 
-        EntityManagerFactory entityFactory = new Configuration()
+        SessionFactory entityFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .buildSessionFactory();
 
@@ -24,8 +30,27 @@ public class AppArticles {
 
         em.close();
 
-        EntityManager emNew = entityFactory.createEntityManager();
+        Session session = entityFactory.openSession();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 
+        CriteriaQuery<Article> criteriaQuery = criteriaBuilder.createQuery(Article.class);
+
+        Root<Article> root = criteriaQuery.from(Article.class);
+//        criteriaQuery.select(root);
+        criteriaQuery
+                .select(root)
+                .where(criteriaBuilder.between(root.get("id"), 7, 9));
+
+        List<Article> resultList = session.createQuery(criteriaQuery).getResultList();
+        resultList.forEach(System.out::println);
+
+
+        session.close();
+
+        entityFactory.close();
+    }
+
+    private static void exampleNamedQuery(EntityManager emNew) {
         {
             System.out.println("Query Article.findAll");
             List<Article> list = emNew.createNamedQuery("Article.findAll", Article.class).getResultList();
@@ -38,10 +63,6 @@ public class AppArticles {
                     .setParameter("id", 9L).getResultList();
             list.forEach(System.out::println);
         }
-
-        emNew.close();
-
-        entityFactory.close();
     }
 
     private static void exampleJpqlDao(EntityManager emNew) {
