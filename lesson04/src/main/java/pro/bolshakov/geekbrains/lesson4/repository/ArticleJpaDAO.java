@@ -6,7 +6,6 @@ import pro.bolshakov.geekbrains.lesson4.domain.Article;
 
 import java.util.List;
 
-@Repository
 public interface ArticleJpaDAO extends JpaRepository<Article, Long> {
     List<Article> findAllByTitleLike(String title);
     List<Article> findAllByIdBetween(Long startId, Long endId);
