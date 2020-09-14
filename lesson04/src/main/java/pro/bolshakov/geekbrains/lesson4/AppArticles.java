@@ -26,6 +26,15 @@ public class AppArticles {
 
         EntityManager emNew = entityFactory.createEntityManager();
 
+        Object singleResult = emNew.createNativeQuery("SELECT max(a.date) from article a").getSingleResult();
+        System.out.println("Max sql Date -> " + singleResult);
+
+        emNew.close();
+
+        entityFactory.close();
+    }
+
+    private static void exampleJpqlDao(EntityManager emNew) {
         ArticleJpqlDAOImpl jpqlDAO = new ArticleJpqlDAOImpl(emNew);
 
         System.out.println("Getting All");
@@ -34,11 +43,6 @@ public class AppArticles {
 
         System.out.println("Getting by id");
         System.out.println(jpqlDAO.findById(all.get(0).getId()));
-
-
-        emNew.close();
-
-        entityFactory.close();
     }
 
     private static void exampleCascadePersist(EntityManager em) {
