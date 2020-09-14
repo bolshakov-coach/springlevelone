@@ -4,6 +4,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Article.findAll", query = "SELECT a from Article a"),
+        @NamedQuery(name = "Article.findByLowerId", query = "SELECT a from Article a where a.id < :id")
+})
 public class Article {
     @Id
     @GeneratedValue

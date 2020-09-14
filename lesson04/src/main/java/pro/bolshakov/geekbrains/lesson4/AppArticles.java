@@ -26,8 +26,18 @@ public class AppArticles {
 
         EntityManager emNew = entityFactory.createEntityManager();
 
-        Object singleResult = emNew.createNativeQuery("SELECT max(a.date) from article a").getSingleResult();
-        System.out.println("Max sql Date -> " + singleResult);
+        {
+            System.out.println("Query Article.findAll");
+            List<Article> list = emNew.createNamedQuery("Article.findAll", Article.class).getResultList();
+            list.forEach(System.out::println);
+        }
+
+        {
+            System.out.println("Query Article.findByLowerId");
+            List<Article> list = emNew.createNamedQuery("Article.findByLowerId", Article.class)
+                    .setParameter("id", 9L).getResultList();
+            list.forEach(System.out::println);
+        }
 
         emNew.close();
 
