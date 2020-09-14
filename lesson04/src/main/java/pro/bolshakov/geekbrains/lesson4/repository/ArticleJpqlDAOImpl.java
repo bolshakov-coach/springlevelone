@@ -1,12 +1,10 @@
 package pro.bolshakov.geekbrains.lesson4.repository;
 
-import org.springframework.stereotype.Repository;
 import pro.bolshakov.geekbrains.lesson4.domain.Article;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
-@Repository
 public class ArticleJpqlDAOImpl implements ArticleDAO {
 
     private final EntityManager em;
