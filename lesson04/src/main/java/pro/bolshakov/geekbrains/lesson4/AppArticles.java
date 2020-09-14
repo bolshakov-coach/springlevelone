@@ -2,9 +2,11 @@ package pro.bolshakov.geekbrains.lesson4;
 
 import org.hibernate.cfg.Configuration;
 import pro.bolshakov.geekbrains.lesson4.domain.*;
+import pro.bolshakov.geekbrains.lesson4.repository.ArticleJpqlDAOImpl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -24,10 +26,15 @@ public class AppArticles {
 
         EntityManager emNew = entityFactory.createEntityManager();
 
-//        exampleCascadePersist(emNew);
-//        exampleCascadeAll(emNew);
+        ArticleJpqlDAOImpl jpqlDAO = new ArticleJpqlDAOImpl(emNew);
 
-        exampleCascadeRemove(emNew);
+        System.out.println("Getting All");
+        List<Article> all = jpqlDAO.findAll();
+        all.forEach(System.out::println);
+
+        System.out.println("Getting by id");
+        System.out.println(jpqlDAO.findById(all.get(0).getId()));
+
 
         emNew.close();
 

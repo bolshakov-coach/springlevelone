@@ -84,4 +84,17 @@ public class Article {
     public void setCategoryLazy(Category categoryLazy) {
         this.categoryLazy = categoryLazy;
     }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", date=" + date +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", author=" + author +
+                ", category=" + category +
+                ", categoryLazy=" + categoryLazy +
+                '}';
+    }
 }
