@@ -28,8 +28,8 @@ public class ArticleServiceImpl {
         Author savedAuthor = authorJpaDAO.save(author);
         Category savedCategory = categoryJpaDAO.save(category);
 
-        article.setAuthor(author);
-        article.setCategory(category);
+        article.setAuthor(savedAuthor);
+        article.setCategory(savedCategory);
 
         articleJpaDAO.save(article);
     }
