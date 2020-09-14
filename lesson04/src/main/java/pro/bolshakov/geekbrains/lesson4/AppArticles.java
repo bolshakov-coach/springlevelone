@@ -1,8 +1,7 @@
 package pro.bolshakov.geekbrains.lesson4;
 
 import org.hibernate.cfg.Configuration;
-import pro.bolshakov.geekbrains.lesson4.domain.Article;
-import pro.bolshakov.geekbrains.lesson4.domain.Category;
+import pro.bolshakov.geekbrains.lesson4.domain.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -24,10 +23,87 @@ public class AppArticles {
         em.close();
 
         EntityManager emNew = entityFactory.createEntityManager();
-        exampleFetching(emNew);
+
+//        exampleCascadePersist(emNew);
+//        exampleCascadeAll(emNew);
+
+        exampleCascadeRemove(emNew);
+
         emNew.close();
 
         entityFactory.close();
+    }
+
+    private static void exampleCascadePersist(EntityManager em) {
+        //save holder
+        {
+
+            em.getTransaction().begin();
+
+            CategoryHolderCascadePersist holder = new CategoryHolderCascadePersist();
+            Category category_persist = new Category("Category persist");
+            holder.setTitle("Holder Persist");
+            holder.setCategory(category_persist);
+
+            em.persist(holder);
+
+            em.getTransaction().commit();
+        }
+        //find holder and change category through holder
+        {
+            em.getTransaction().begin();
+
+            CategoryHolderCascadePersist foundHolder = em.find(CategoryHolderCascadePersist.class, 11L);
+            foundHolder.setTitle(foundHolder.getTitle() + " updated");
+            Category category = foundHolder.getCategory();
+            category.setName(category.getName() + " updated");
+
+            em.merge(foundHolder);
+
+            em.getTransaction().commit();
+        }
+
+    }
+
+    private static void exampleCascadeRemove(EntityManager em) {
+        //https://stackoverflow.com/questions/18373383/jpa-onetoone-difference-between-cascade-merge-and-persist#:~:text=Persist%20and%20merge%20are%20designed,the%20object%20may%20already%20exist.
+        //save holder
+        {
+
+            em.getTransaction().begin();
+
+            Category category = em.merge(new Category("Category remove"));
+
+            CategoryHolderCascadeRemove holder = new CategoryHolderCascadeRemove();
+            holder.setTitle("Holder remove");
+            holder.setCategory(category);
+
+            em.persist(holder);
+
+            em.getTransaction().commit();
+        }
+        //find holder and change category through holder
+        {
+            em.getTransaction().begin();
+
+            CategoryHolderCascadeRemove foundHolder = em.find(CategoryHolderCascadeRemove.class, 12L);
+            em.remove(foundHolder);
+
+            em.getTransaction().commit();
+        }
+
+    }
+
+    private static void exampleCascadeAll(EntityManager em) {
+        em.getTransaction().begin();
+
+        CategoryHolderCascadeAll holder = new CategoryHolderCascadeAll();
+        holder.setTitle("Holder ALL");
+        holder.setCategory(new Category("Category depended"));
+
+        em.persist(holder);
+
+        em.getTransaction().commit();
     }
 
     private static void examplePersistenceArea(EntityManager em) {

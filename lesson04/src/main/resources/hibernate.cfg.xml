@@ -20,5 +20,10 @@
         <mapping class="pro.bolshakov.geekbrains.lesson4.domain.Author"/>
         <mapping class="pro.bolshakov.geekbrains.lesson4.domain.Article"/>
 
+        <!--entities for cascade examples-->
+        <mapping class="pro.bolshakov.geekbrains.lesson4.domain.CategoryHolderCascadeAll"/>
+        <mapping class="pro.bolshakov.geekbrains.lesson4.domain.CategoryHolderCascadePersist"/>
+        <mapping class="pro.bolshakov.geekbrains.lesson4.domain.CategoryHolderCascadeRemove"/>
+
     </session-factory>
 </hibernate-configuration>
