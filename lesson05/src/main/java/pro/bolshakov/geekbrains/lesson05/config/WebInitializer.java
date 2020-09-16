@@ -29,5 +29,6 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
         russianCharsFilter.setForceEncoding(true);
         HiddenHttpMethodFilter hiddenHttpMethodFilter = new HiddenHttpMethodFilter();
         return new Filter[]{russianCharsFilter, hiddenHttpMethodFilter};
+//        return new Filter[]{hiddenHttpMethodFilter};
     }
 }
