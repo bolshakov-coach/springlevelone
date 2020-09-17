@@ -1,20 +1,19 @@
 package pro.bolshakov.geekbrains.lesson05.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.web.servlet.ViewResolver;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+
+
+import java.util.Date;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan("pro.bolshakov.geekbrains.lesson05")
+//@ComponentScan("pro.bolshakov.geekbrains.lesson05")
 public class AppConfig implements WebMvcConfigurer {
 
 
@@ -25,27 +24,33 @@ public class AppConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/img/");
     }
 
-    @Bean
+/*    @Bean
     public SpringResourceTemplateResolver templateResolver(){
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
         resolver.setPrefix("classpath:/templates/");
         resolver.setSuffix(".html");
         return resolver;
-    }
+    }*/
 
-    @Bean
+    /*@Bean
     public SpringTemplateEngine templateEngine(SpringResourceTemplateResolver resolver){
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(resolver);
         return templateEngine;
-    }
+    }*/
 
-    @Bean
-    public ViewResolver viewResolver(SpringTemplateEngine templateEngine){
-        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setTemplateEngine(templateEngine);
-        viewResolver.setCharacterEncoding("UTF-8");
-        return viewResolver;
+//    @Bean
+//    public ViewResolver viewResolver(SpringTemplateEngine templateEngine){
+//        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+//        viewResolver.setTemplateEngine(templateEngine);
+//        viewResolver.setCharacterEncoding("UTF-8");
+//        return viewResolver;
+//    }
+
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(dateFormatter());
     }
 
     @Bean
@@ -56,4 +61,8 @@ public class AppConfig implements WebMvcConfigurer {
         return messageSource;
     }
 
+    @Bean
+    public MyDateFormatter dateFormatter(){
+        return new MyDateFormatter(messageSource());
+    }
 }

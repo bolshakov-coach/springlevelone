@@ -17,7 +17,8 @@
         <td th:text="${user.name}">Koko</td>
         <td th:text="${user.email}">koko@email</td>
         <td th:text="${user.age}">123</td>
-        <td th:text="${@dateFormatter.format(user.date,#locale)}">22.12.2000</td>
+        <!--<td th:text="${@dateFormatter.format(user.date,#locale)}">22.12.2000</td>-->
+        <td th:text="${{user.date}}">22.12.2000</td>
     </tr>
 </table>
 
