@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class User {
 
-    private String name;
+    private String name = "Unknown";
     private String email;
     private int age;
-    private Date date;
+    private Date date = new Date(100,1,1);
 
 
     public User() {
@@ -54,5 +54,15 @@ public class User {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", date=" + date +
+                '}';
     }
 }

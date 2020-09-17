@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import pro.bolshakov.geekbrains.lesson05.domain.User;
 
 import java.util.ArrayList;
@@ -38,10 +39,15 @@ public class IndexController {
 
     @GetMapping("/users")
     public String userList(Model model){
+        model.addAttribute("user", new User());
         return "userList";
     }
 
-
+    @PostMapping("users")
+    public String addUser(User userForm){
+        System.out.println("Request contains user -> " + userForm.toString());
+        return "redirect:/users";
+    }
 
 
 }
