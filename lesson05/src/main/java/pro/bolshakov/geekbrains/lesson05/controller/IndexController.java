@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import pro.bolshakov.geekbrains.lesson05.domain.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,9 +17,9 @@ public class IndexController {
     private List<User> userList = new ArrayList<>();
 
     {
-        userList.add(new User("Ivan", "ivanov@email.ru", 30));
-        userList.add(new User("Petr", "petrov@email.ru", 60));
-        userList.add(new User("Alex", "romanov@email.ru", -200));
+        userList.add(new User("Ivan", "ivanov@email.ru", 30, new Date(1990, 1, 10)));
+        userList.add(new User("Petr", "petrov@email.ru", 60, new Date(1993, 4, 15)));
+        userList.add(new User("Alex", "romanov@email.ru", -200, new Date(2000, 11, 1)));
     }
 
     @ModelAttribute("users")
