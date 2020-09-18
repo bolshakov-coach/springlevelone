@@ -43,7 +43,7 @@ public class IndexController {
         return "userList";
     }
 
-    @PostMapping("users")
+    @PostMapping("/users")
     public String addUser(User userForm){
         System.out.println("Request contains user -> " + userForm.toString());
         return "redirect:/users";
