@@ -1,4 +1,5 @@
 server:
-  port: 9999
-  servlet:
-    context-path: /app
+  port: 8080
+spring:
+  mvc:
+    static-path-pattern: /statico/**
