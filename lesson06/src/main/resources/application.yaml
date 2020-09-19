@@ -3,3 +3,8 @@ server:
 spring:
   mvc:
     static-path-pattern: /statico/**
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, beans
