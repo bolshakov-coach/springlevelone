@@ -27,16 +27,18 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void initData(){
+
         Product cheese = new Product(1L,"Cheese", 450.0);
         Product milk = new Product(2L,"Milk", 55.0);
         Product bread = new Product(3L,"Bread", 34.0);
         Product beer = new Product(4L,"Beer", 65.0);
 
+        System.out.println("init Products");
         cheese = productDao.save(cheese);
         milk = productDao.save(milk);
         bread = productDao.save(bread);
         beer = productDao.save(beer);
-
+        System.out.println("init orders");
         Order order1 = new Order();
         order1.setProducts(new ArrayList<>(Arrays.asList(cheese, milk, bread)));
         orderDao.save(order1);

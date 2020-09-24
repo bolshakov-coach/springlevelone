@@ -1,15 +1,12 @@
 package pro.bolshakov.geekbrains.springlevelone.lesson07.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import pro.bolshakov.geekbrains.springlevelone.lesson07.dao.ProductDao;
 import pro.bolshakov.geekbrains.springlevelone.lesson07.domain.Product;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/products")
 public class ProductController {
 
@@ -19,11 +16,34 @@ public class ProductController {
         this.productDao = productDao;
     }
 
-    @GetMapping("/1")
-    @ResponseBody
-    public Product getProduct(){
-        List<Product> all = productDao.findAll();
-        return all.isEmpty() ? null : all.get(0);
+    @GetMapping
+    public List<Product> getAll(){
+        return productDao.findAll();
     }
+
+    @GetMapping("/{id}")
+    public Product getProduct(@PathVariable Long id){
+        return productDao.findById(id).orElse(null);
+    }
+
+    @PostMapping("/")
+    public Product addProduct(@RequestBody Product product){
+        System.out.println(product);
+        return productDao.save(product);
+    }
+
+    @PutMapping("/{productId}")
+    public Product updateProduct(@RequestBody Product product, @PathVariable(name = "productId") Long id){
+        product.setId(id);
+        System.out.println(product);
+        return productDao.save(product);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable Long id){
+        productDao.deleteById(id);
+    }
+
+
 
 }
