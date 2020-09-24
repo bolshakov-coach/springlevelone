@@ -44,11 +44,11 @@ public class DataLoader implements CommandLineRunner {
         orderDao.save(order1);
 
         Order order2 = new Order();
-        order1.setProducts(new ArrayList<>(Arrays.asList(cheese, beer)));
+        order2.setProducts(new ArrayList<>(Arrays.asList(cheese, beer)));
         orderDao.save(order2);
 
         Order order3 = new Order();
-        order1.setProducts(new ArrayList<>(Arrays.asList(cheese, bread)));
+        order3.setProducts(new ArrayList<>(Arrays.asList(cheese, bread)));
         orderDao.save(order3);
 
     }
