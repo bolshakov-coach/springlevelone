@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pro.bolshakov.geekbrains.springlevelone.lesson08.domain.Role;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.domain.User;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.service.UserService;
 
@@ -27,18 +28,16 @@ public class UserController {
                           @RequestParam(required = false) String username,
                           @RequestParam(required = false) String password){
         List<User> userList = new ArrayList<>();
-
-        if(username != null){
-            boolean auth = userService.auth(username, password);
-            if(auth){
+        User authUser = userService.auth(username, password);
+        if(authUser != null){
+            if(Role.ADMIN.equals(authUser.getRole())){
+                System.out.println("You have permission (authorization) ");
                 userList = userService.getAll();
-                System.out.println("You are authenticated");
+            }
+            else {
+                System.out.println("You do not have permission (authorization)");
             }
         }
-        if(userList.isEmpty()){
-            System.out.println("You are not authenticated");
-        }
-
         model.addAttribute("users", userList);
         return "user-list";
     }

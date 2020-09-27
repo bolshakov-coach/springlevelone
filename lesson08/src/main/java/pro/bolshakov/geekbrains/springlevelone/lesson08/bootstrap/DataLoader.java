@@ -7,6 +7,7 @@ import pro.bolshakov.geekbrains.springlevelone.lesson08.dao.ProductDao;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.dao.UserDao;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.domain.Order;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.domain.Product;
+import pro.bolshakov.geekbrains.springlevelone.lesson08.domain.Role;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.domain.User;
 
 import java.util.ArrayList;
@@ -58,10 +59,12 @@ public class DataLoader implements CommandLineRunner {
         User user = new User();
         user.setName("User");
         user.setPassword("pass");
+        user.setRole(Role.USER);
 
         User admin = new User();
         admin.setName("Admin");
         admin.setPassword("admin");
+        admin.setRole(Role.ADMIN);
 
         userDao.save(user);
         userDao.save(admin);

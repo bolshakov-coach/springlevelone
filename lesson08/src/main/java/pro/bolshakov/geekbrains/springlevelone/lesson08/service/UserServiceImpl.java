@@ -22,12 +22,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean auth(String name, String password) {
-        User user = userDao.findFirstByName(name);
-        if(user == null){
-            return false;
+    public User auth(String username, String password) {
+        if(username == null || username.isEmpty()){
+            System.out.println("You are not authenticated");
+            return null;
         }
-        return Objects.equals(password, user.getPassword());
+        User user = userDao.findFirstByName(username);
+        if(user == null){
+            System.out.println("You are not authenticated");
+            return null;
+        }
+        if(!Objects.equals(password, user.getPassword())){
+            System.out.println("You are not authenticated");
+            return null;
+        }
+        System.out.println("You are authenticated");
+        return user;
     }
 
     @Override

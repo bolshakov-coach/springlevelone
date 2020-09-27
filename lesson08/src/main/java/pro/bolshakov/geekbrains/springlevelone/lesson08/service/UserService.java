@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserService {
     User getById(Long id);
-    boolean auth(String name, String password);
+    User auth(String name, String password);
 
     List<User> getAll();
 }
