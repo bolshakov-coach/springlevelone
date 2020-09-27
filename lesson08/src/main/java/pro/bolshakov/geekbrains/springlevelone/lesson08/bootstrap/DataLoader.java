@@ -4,8 +4,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.dao.OrderDao;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.dao.ProductDao;
+import pro.bolshakov.geekbrains.springlevelone.lesson08.dao.UserDao;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.domain.Order;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.domain.Product;
+import pro.bolshakov.geekbrains.springlevelone.lesson08.domain.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,10 +17,12 @@ public class DataLoader implements CommandLineRunner {
 
     private final OrderDao orderDao;
     private final ProductDao productDao;
+    private final UserDao userDao;
 
-    public DataLoader(OrderDao orderDao, ProductDao productDao) {
+    public DataLoader(OrderDao orderDao, ProductDao productDao, UserDao userDao) {
         this.orderDao = orderDao;
         this.productDao = productDao;
+        this.userDao = userDao;
     }
 
     @Override
@@ -50,6 +54,17 @@ public class DataLoader implements CommandLineRunner {
         Order order3 = new Order();
         order3.setProducts(new ArrayList<>(Arrays.asList(cheese, bread)));
         orderDao.save(order3);
+
+        User user = new User();
+        user.setName("User");
+        user.setPassword("pass");
+
+        User admin = new User();
+        admin.setName("Admin");
+        admin.setPassword("admin");
+
+        userDao.save(user);
+        userDao.save(admin);
 
     }
 
