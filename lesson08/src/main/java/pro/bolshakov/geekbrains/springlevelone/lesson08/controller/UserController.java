@@ -7,39 +7,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.config.UserInfo;
-import pro.bolshakov.geekbrains.springlevelone.lesson08.domain.Role;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.domain.User;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.service.UserService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
-    private final UserInfo userInfo;
 
     public UserController(UserService userService, UserInfo userInfo) {
         this.userService = userService;
-        this.userInfo = userInfo;
     }
 
     @GetMapping
     public String getList(Model model,
                           @RequestParam(required = false) String username,
                           @RequestParam(required = false) String password) {
-        List<User> userList = new ArrayList<>();
-        if(userInfo.hasRole(Role.ADMIN)){
-            System.out.println("You have permission (authorization) ");
-            userList = userService.getAll();
-        }
-        else{
-            System.out.println("You do not have permission (authorization)");
-        }
-
-        model.addAttribute("users", userList);
+        model.addAttribute("users", userService.getAll());
         return "user-list";
     }
 

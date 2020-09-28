@@ -16,9 +16,22 @@ import java.util.Arrays;
 @Component
 public class DataLoader implements CommandLineRunner {
 
+    public static final User USER = new User();
+    public static final User ADMIN = new User();
+
     private final OrderDao orderDao;
     private final ProductDao productDao;
     private final UserDao userDao;
+
+    static {
+        USER.setName("User");
+        USER.setPassword("pass");
+        USER.setRole(Role.USER);
+
+        ADMIN.setName("Admin");
+        ADMIN.setPassword("admin");
+        ADMIN.setRole(Role.ADMIN);
+    }
 
     public DataLoader(OrderDao orderDao, ProductDao productDao, UserDao userDao) {
         this.orderDao = orderDao;
@@ -56,18 +69,8 @@ public class DataLoader implements CommandLineRunner {
         order3.setProducts(new ArrayList<>(Arrays.asList(cheese, bread)));
         orderDao.save(order3);
 
-        User user = new User();
-        user.setName("User");
-        user.setPassword("pass");
-        user.setRole(Role.USER);
-
-        User admin = new User();
-        admin.setName("Admin");
-        admin.setPassword("admin");
-        admin.setRole(Role.ADMIN);
-
-        userDao.save(user);
-        userDao.save(admin);
+        userDao.save(USER);
+        userDao.save(ADMIN);
 
     }
 
