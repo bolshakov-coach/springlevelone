@@ -1,5 +1,7 @@
 package pro.bolshakov.geekbrains.springlevelone.lesson08.service;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.dao.UserDao;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.domain.User;
@@ -43,5 +45,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAll() {
         return userDao.findAll();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userDao.findFirstByName(username);
     }
 }
