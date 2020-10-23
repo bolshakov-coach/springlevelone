@@ -11,5 +11,10 @@ public class AppConfig {
     @Bean(name = "camera")
     public Camera camera(CameraRoll cameraRoll){
         return new CameraImpl(cameraRoll);
+    };
+
+    @Bean(name = "cup")
+    public Cup cup(Drink coffee){
+        return new CupImpl(coffee);
     }
 }

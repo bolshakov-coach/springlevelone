@@ -21,4 +21,18 @@
     <bean id="cameraConstructor" class="pro.bolshakov.geekbrains.springlevelone.CameraImpl">
         <constructor-arg name="cameraRoll" ref="cameraRoll"/>
     </bean>
+
+    <bean id="cup" class="pro.bolshakov.geekbrains.springlevelone.CupImpl">
+        <property name="drink" ref="cupDrink"/>
+    </bean>
+
+    <bean id="cupInnerBean" class="pro.bolshakov.geekbrains.springlevelone.CupImpl">
+        <property name="drink">
+            <bean class="pro.bolshakov.geekbrains.springlevelone.Coffee"/>
+        </property>
+    </bean>
+
+    <bean id="cupConstructor" class="pro.bolshakov.geekbrains.springlevelone.CupImpl">
+        <constructor-arg name="drink" ref="coffee"/>
+    </bean>
 </beans>

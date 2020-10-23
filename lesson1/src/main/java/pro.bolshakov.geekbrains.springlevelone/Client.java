@@ -19,5 +19,19 @@ public class Client {
         Camera cameraConstructor = context.getBean("cameraConstructor", Camera.class);
         cameraConstructor.doPhotograph();
 
+
+        Cup cup = context.getBean("cup", Cup.class);
+        cup.doDrink();
+
+        CupImpl cupImpl = context.getBean("cup", CupImpl.class);
+        System.out.println(cup == cupImpl);
+
+        Cup cupInnerBean = context.getBean("cupInnerBean", Cup.class);
+        cupInnerBean.doDrink();
+
+
+        Cup cupConstructor = context.getBean("cupConstructor", Cup.class);
+        cupConstructor.doDrink();
+
     }
 }

@@ -20,5 +20,17 @@ public class ClientJavaConfig {
         Camera cameraComponentNew = context.getBean("cameraComponent", Camera.class);
         cameraComponentNew.doPhotograph();
 
+        Cup cupComponent = context.getBean("cupComponent", Cup.class);
+        cupComponent.doDrink();
+
+        cupComponent.breaking();
+
+        cupComponent.doDrink();
+
+        //get new
+        System.out.println("give me new cup!");
+        Cup cupComponentNew = context.getBean("cupComponent", Cup.class);
+        cupComponentNew.doDrink();
+
     }
 }
