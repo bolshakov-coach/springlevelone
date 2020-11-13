@@ -48,6 +48,7 @@ class ProductControllerTest {
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
                 .get("/products")
                 .contentType(MediaType.APPLICATION_JSON);
+        //check
         mockMvc.perform(requestBuilder)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))

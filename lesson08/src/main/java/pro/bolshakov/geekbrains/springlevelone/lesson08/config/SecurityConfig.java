@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.bootstrap.DataLoader;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.domain.Role;
 import pro.bolshakov.geekbrains.springlevelone.lesson08.service.UserService;
@@ -53,7 +54,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/auth")
                 .permitAll()
                 .and()
-                .httpBasic();
+                    .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/").deleteCookies("JSESSIONID")
+                    .invalidateHttpSession(true)
+                .and()
+                    .csrf().disable();
     }
 
     @Bean

@@ -7,10 +7,12 @@
 <body>
 
 <a th:href="@{/users}">Users</a><br>
-<a th:href="@{/login}">Login</a><br>
-
+<div sec:authorize="!isAuthenticated()">
+    <a th:href="@{/login}">Login</a><br>
+</div>
 
 <div sec:authorize="isAuthenticated()">
+    <a th:href="@{/logout}">Logout</a><br>
     <h2> Next information only for authenticated</h2>
     Authenticated username:
     <div sec:authentication="principal.username"></div>
